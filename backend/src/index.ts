@@ -6,28 +6,33 @@ const app = express();
 // Middleware to parse JSON
 app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/mentor-mentee', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.log(err));
+// MongoDB
+mongoose.connect('mongodb://localhost:27017/mentor-mentee');
+console.log('MongoDB connected');
 
-// Your API routes will go here, e.g.:
-import authRoutes from './routes/auth';
-import profileRoutes from './routes/profile';
+// Import routes
+import authRoutes from './routes/user';
+import profileRoutes from './routes/Profile';
 import MentorshipRequestsRoutes from './routes/MentorshipRequests';
-import availabilityRoutes from './routes/availability';
+import availabilityRoutes from './routes/Availability';
+import sessionRoutes from './routes/sessions';
+import feedbackRoutes from './routes/Feedback';
 
-app.use('/api/availability', availabilityRoutes);
-app.use('/api/mentorship-requests', mentorshipRequestsRoutes);
+// Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/mentorship-requests', MentorshipRequestsRoutes);
+app.use('/api/availability', availabilityRoutes);
+app.use('/api/session', sessionRoutes);
+app.use('/api/feedback', feedbackRoutes);
+
+// a simple route for testing
+app.get('/', (req, res) => {
+  res.send('Hello! Your server is doing great.');
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  
 });

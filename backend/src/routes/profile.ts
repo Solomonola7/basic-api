@@ -1,46 +1,49 @@
 import { Router } from 'express';
-import Profile from '../models/Profile';
+import Availability from '../models/Availability';
 import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
-// Create or update profile
+// Add or update availability
 router.post('/', authMiddleware, async (req, res) => {
   const userId = req.user?.userId;
-  const { bio, skills, availability } = req.body;
+  const { days, startTime, endTime } = req.body;
 
   try {
-    let profile = await Profile.findOne({ user: userId });
-    if (profile) {
+    let availability = await Availability.findOne({ user: userId });
+    if (availability) {
       // update
-      profile.bio = bio || profile.bio;
-      profile.skills = skills || profile.skills;
-      profile.availability = availability || profile.availability;
-      await profile.save();
+      availability.days = days || availability.days;
+      availability.startTime = startTime || availability.startTime;
+      availability.endTime = endTime || availability.endTime;
+      await availability.save();
     } else {
       // create new
-      profile = new Profile({
-        user: userId,
-        bio,
-        skills,
-        availability,
-      });
-      await profile.save();
+      availability = new Availability({ user: userId, days, startTime, endTime });
+      await availability.save();
     }
-    res.json(profile);
+    res.json(availability);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
 
-// Get profile
+// Get user's availability
 router.get('/', authMiddleware, async (req, res) => {
   const userId = req.user?.userId;
   try {
-    const profile = await Profile.findOne({ user: userId }).populate('user', ['email', 'role']);
-    res.json(profile);
+    const availability = await Availability.findOne({ user: userId });
+    res.json(availability);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    if (err instanceof Error) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(500).json({ error: 'Internal server error' });
+    }
   }
 });
 

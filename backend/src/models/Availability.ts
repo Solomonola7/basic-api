@@ -14,4 +14,5 @@ const AvailabilitySchema = new mongoose.Schema({
   endTime: String,
 });
 
-export default mongoose.model<IAvailability>('Availability', AvailabilitySchema);
+const Availability = mongoose.model<IAvailability>('Availability', AvailabilitySchema);
+export default Availability;

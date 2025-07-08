@@ -10,4 +10,5 @@ const AvailabilitySchema = new mongoose_1.default.Schema({
     startTime: String,
     endTime: String,
 });
-exports.default = mongoose_1.default.model('Availability', AvailabilitySchema);
+const Availability = mongoose_1.default.model('Availability', AvailabilitySchema);
+exports.default = Availability;

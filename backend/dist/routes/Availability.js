@@ -15,14 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const Availability_1 = __importDefault(require("../models/Availability")); // fix path as needed
-const auth_1 = __importDefault(require("../middleware/auth")); // adjust path if needed
+const auth_1 = require("../middleware/auth"); // adjust path if needed
 const router = express_1.default.Router();
-router.post('/', auth_1.default, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/', auth_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const userIdStr = (_a = req.user) === null || _a === void 0 ? void 0 : _a.userId;
     if (!userIdStr || !mongoose_1.default.Types.ObjectId.isValid(userIdStr)) {
         return res.status(400).json({ error: 'Invalid user ID' });
-        t;
     }
     const userId = new mongoose_1.default.Types.ObjectId(userIdStr);
     const { days, startTime, endTime } = req.body;

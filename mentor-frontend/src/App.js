@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// Change the import statement here
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from './components/common/Header';
@@ -46,9 +47,9 @@ function App() {
   };
 
   return (
-    <div>
-      <Header />
-      <Router>
+    <Router> {/* Keep this as is */}
+      <div>
+        <Header />
         <Routes>
           {/* Public route */}
           <Route path="/" element={<Login />} />
@@ -151,9 +152,9 @@ function App() {
             }
           />
         </Routes>
-      </Router>
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

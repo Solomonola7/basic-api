@@ -1,9 +1,8 @@
 import React from 'react';
-
 const Header = () => {
   return (
-    <header style={{ padding: '10px', backgroundColor: '#f8f8f8' }}>
-      <h1>Mentor Platform</h1>
+    <header className="header">
+      <h1>Mentor Mentee App</h1>
     </header>
   );
 };

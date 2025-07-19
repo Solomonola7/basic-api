@@ -4,7 +4,6 @@ import { authMiddleware } from '../middleware/auth';
 
 const router = Router();
 
-// Add or update availability
 router.post('/', authMiddleware, async (req, res) => {
   const userId = req.user?.userId;
   const { days, startTime, endTime } = req.body;
@@ -12,13 +11,11 @@ router.post('/', authMiddleware, async (req, res) => {
   try {
     let availability = await Availability.findOne({ user: userId });
     if (availability) {
-      // update
       availability.days = days || availability.days;
       availability.startTime = startTime || availability.startTime;
       availability.endTime = endTime || availability.endTime;
       await availability.save();
     } else {
-      // create new
       availability = new Availability({ user: userId, days, startTime, endTime });
       await availability.save();
     }

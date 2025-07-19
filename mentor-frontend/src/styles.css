@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+
+body {
+  margin: 0; 
+  padding: 0;
+  font-family: 'Arial, sans-serif';
+  background-color: #f0f4f8;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+.app-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1; 
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.main-content {
+  flex: 1; /* grow to fill space */
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 20px; 
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.login-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  background-color: #3b4765;
+  border-radius: 8px;
+  box-shadow:  4px 12px rgba(1, 1, 1, 0.2);
+  box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.form-group label {
+  width: 70px;
+  margin-right: 7px;
+  font-weight: bold;
+}
+.App {
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.header-title {
+  font-size: 5rem;
+  color: #2c3e50;
+  margin-top: 40px;
+  margin-bottom: 100px;
+  font-family: 'Helvetica Neue', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-shadow: 5px 10px 2px rgba(1, 0, 1, 0.1);
+  text-align: center;
+}
+
+button {
+  background-color: #85733f;
+  color: #f8f8f8;
+  border: none;
+  padding: 10px 40px;
+  margin: 20px;
+  border-radius: 9px;
+  cursor: grab;
+  font-size: 1.1rem;
+  transition: background-color 0.6s ease;
+}
+
+button:hover {
+  background-color: #3774b1;
+}
+.footer {
+  background-color: #7384a6;
+  color: #faf8f8f8;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 100px;
+  margin-bottom: 0;
+  text-align: center;
+}
+/* Responsive styles */
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 2rem;
   }
 }

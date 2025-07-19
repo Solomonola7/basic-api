@@ -8,7 +8,6 @@ const Login = () => {
 
   const handleLogin = () => {
     localStorage.setItem('role', role);
-    // Redirect based on role
     if (role === 'admin') {
       navigate('/admin/matches'); // or any admin route
     } else if (role === 'mentor') {
@@ -19,25 +18,33 @@ const Login = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2>Login</h2>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+    <div className="app-container">
+      <div className="main-content">
+        <div className="login-wrapper">
+          <h2>Login</h2>
+          <div className="form-group">
+            <label>Username:
+            </label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="form-group">
+            <label>Role:</label>
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="admin">Admin</option>
+              <option value="mentor">Mentor</option>
+              <option value="mentee">Mentee</option>
+            </select>
+          </div>
+          <button onClick={handleLogin}>Login</button>
+        </div>
       </div>
-      <div>
-        <label>Role:</label>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="admin">Admin</option>
-          <option value="mentor">Mentor</option>
-          <option value="mentee">Mentee</option>
-        </select>
-      </div>
-      <button onClick={handleLogin}>Login</button>
+      <footer className="footer">
+        © 2025 Solomonola
+      </footer>
     </div>
   );
 };

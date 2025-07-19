@@ -1,10 +1,6 @@
 import React from 'react';
-const Header = () => {
-  return (
-    <header className="header">
-      <h1>Mentor Mentee App</h1>
-    </header>
-  );
-};
+function Header() {
+  return <h1 className="header-title">Mentor-Mentee App</h1>;
+  }
 
 export default Header;

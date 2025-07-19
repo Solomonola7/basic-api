@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-// Change the import statement here
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import './styles.css'; 
 
 import Header from './components/common/Header';
-import Footer from './components/common/Footer';
+import Footer from './components/common/Footer';                                                                                                    
 
 import Login from './Pages/common/Login';
 
@@ -30,10 +30,17 @@ import SessionsMentor from './Pages/Mentor/Sessions';
 
 function App() {
   const [role, setRole] = useState(null);
+  const [message, setMessage] = useState(''); // backend message
 
   useEffect(() => {
     const storedRole = localStorage.getItem('role');
     setRole(storedRole);
+
+    // Fetch from backend 
+    fetch('http://localhost:5000/') 
+      .then(res => res.text())
+      .then(data => setMessage(data))
+      .catch(error => console.error('Error fetching:', error));
   }, []);
 
   const PrivateRoute = ({ children, requiredRole }) => {
@@ -47,9 +54,13 @@ function App() {
   };
 
   return (
-    <Router> {/* Keep this as is */}
+    <Router> 
       <div>
         <Header />
+        {/* Display backend message */}
+        <div style={{ padding: '10px', backgroundColor: '#f0f0f0', textAlign: 'center' }}>
+          {message || 'Loading message...'}
+        </div>
         <Routes>
           {/* Public route */}
           <Route path="/" element={<Login />} />

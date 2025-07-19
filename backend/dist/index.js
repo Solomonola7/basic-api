@@ -12,6 +12,7 @@ app.use(express_1.default.json());
 mongoose_1.default.connect('mongodb://localhost:27017/mentor-mentee');
 console.log('MongoDB connected');
 // Import routes
+const cors_1 = __importDefault(require("cors"));
 const user_1 = __importDefault(require("./routes/user"));
 const Profile_1 = __importDefault(require("./routes/Profile"));
 const MentorshipRequests_1 = __importDefault(require("./routes/MentorshipRequests"));
@@ -19,6 +20,10 @@ const Availability_1 = __importDefault(require("./routes/Availability"));
 const sessions_1 = __importDefault(require("./routes/sessions"));
 const Feedback_1 = __importDefault(require("./routes/Feedback"));
 // Use routes
+app.use((0, cors_1.default)({
+    origin: 'http://localhost:3000', // Adjust this to your frontend URL
+    credentials: true,
+}));
 app.use('/api/auth', user_1.default);
 app.use('/api/profile', Profile_1.default);
 app.use('/api/mentorship-requests', MentorshipRequests_1.default);
@@ -27,7 +32,7 @@ app.use('/api/session', sessions_1.default);
 app.use('/api/feedback', Feedback_1.default);
 // a simple route for testing
 app.get('/', (req, res) => {
-    res.send('Hello! Your server is doing great.');
+    res.send('Hello! Your server is doing just fine.');
 });
 // Start server
 const PORT = process.env.PORT || 5000;
